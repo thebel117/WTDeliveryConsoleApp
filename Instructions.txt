@@ -1,0 +1,63 @@
+For this assignment, you will create a C#/.NET Console Application that follows the Repository Pattern, using a type of ICollection or IEnumerable (such as a List, Dictionary or Queue) as a mock database. You will need the repository itself, a User Interface that uses the Console to allow for user interaction with the repository, and a set of Unit Tests.
+
+You should have been given a repository challenge as a morning challenge to complete the POCO and repository classes.
+
+If not, then choose one of the options at the bottom.
+
+ 
+
+Format
+You will turn in a GitHub link to a repository that contain a single C# solution with 3 Projects:
+
+1. Class Library with a POCO and a Repository class
+
+POCO: 
+
+Basic object to be contained in a collection 
+Has properties
+Repository: 
+
+Contains a collection of items (in a List, Dictionary or Queue)
+Has CRUD methods to interact with the collection
+Can have properties/fields of its own
+2. A Console App with a ProgramUI class
+
+Program.cs creates an instance of ProgramUI and runs it
+
+ProgramUI has Console methods to interact with repo
+
+3. A Unit Test Project with a Unit Test class (or a few)
+
+Test Class has test methods to test Repo CRUD methods (for instance, get an item from the repo, assert that it was retrieved correctly)
+
+ 
+
+ 
+
+Options
+
+You can choose from any of the following options (these should be the same as the morning challenge):
+
+ 
+
+Delivery Service 
+Warner Transit Federal is finally going electronic with their delivery tracking. They need an electronic record of current and past deliveries 
+
+Repo type: List 
+
+You need to build an app that will (repo methods): 
+
+Add a new delivery to the history (Create)
+List all en route deliveries, and all completed deliveries (Read)
+Update the status of a delivery (Update)
+Cancel a delivery (Delete)
+Each delivery will need (POCO): 
+
+The order date 
+The delivery date 
+The status of the order (Scheduled, EnRoute, Complete, or Canceled)
+The Item number
+The item quantity
+The customer ID (you can assume every customer has an account with a unique ID number of some kind)
+
+        

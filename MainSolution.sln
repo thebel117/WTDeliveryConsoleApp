@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppConsole", "AppConsole\Ap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarnerTransitDelivery", "WarnerTransitDelivery\WarnerTransitDelivery.csproj", "{C75F4EE2-2A91-4605-A5CC-B193B10BB9DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarnerTransitDeliveryRepository", "WarnerTransitDeliveryRepository\WarnerTransitDeliveryRepository.csproj", "{75C9AD44-E893-48FC-8DC5-772E53C365C6}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -10,4 +10,4 @@ namespace WarnerTransitConsole
             program.Run(); // Start the application
         }
     }
-}
+};

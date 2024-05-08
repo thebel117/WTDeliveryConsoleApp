@@ -48,7 +48,7 @@ Repo type: List
 You need to build an app that will (repo methods): 
 
 Add a new delivery to the history (Create)
-List all en route deliveries, and all completed deliveries (Read)
+List all en route deliveries, and all completed deliveries (Read) //(just gonna make this one thing)
 Update the status of a delivery (Update)
 Cancel a delivery (Delete)
 Each delivery will need (POCO): 

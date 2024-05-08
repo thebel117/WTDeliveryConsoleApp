@@ -15,17 +15,17 @@ namespace WarnerTransitConsole
 
             // Seed data for deliveries
             _deliveryRepository.CreateDelivery(new Delivery(
-                1,
-                "1001",
-                5,
-                new DateTime(2024, 05, 07),
-                new DateTime(2024, 05, 15),
-                DeliveryStatus.Scheduled.ToString(),
-                12345
+                101,                                      // DeliverID 
+                "1001",                                 //Item number
+                5,                                      // Item Quantity
+                new DateTime(2024, 05, 07),             //Order date
+                new DateTime(2024, 05, 15),             //Delivery date
+                DeliveryStatus.Scheduled.ToString(),    //Status
+                12345                                   // CustomerID
             ));
 
             _deliveryRepository.CreateDelivery(new Delivery(
-                2,
+                202,
                 "1002",
                 3,
                 new DateTime(2024, 05, 08),
@@ -35,7 +35,7 @@ namespace WarnerTransitConsole
             ));
 
             _deliveryRepository.CreateDelivery(new Delivery(
-                3,
+                303,
                 "1003",
                 7,
                 new DateTime(2024, 05, 09),
@@ -57,6 +57,8 @@ namespace WarnerTransitConsole
                 Console.Write("\nEnter choice: ");
                 string? choice = Console.ReadLine();
 
+Console.Clear(); 
+
                 switch (choice)
                 {
                     case "1":
@@ -69,11 +71,8 @@ namespace WarnerTransitConsole
                         GetCompletedDeliveries();
                         break;
                     case "4":
-                        GetEnRouteDeliveries();
-                        break;
-                    case "5":
                         Console.WriteLine("Enter the item number of the delivery to update:");
-                        string itemNumber = Console.ReadLine();
+                        string? itemNumber = Console.ReadLine();
                         Console.WriteLine("Enter the new status (Scheduled, EnRoute, Complete, Canceled):");
                         if (Enum.TryParse(Console.ReadLine(), out DeliveryStatus newStatus))
                         {
@@ -88,10 +87,10 @@ namespace WarnerTransitConsole
                             Console.WriteLine("Invalid status entered.");
                         }
                         break;
-                    case "6":
+                    case "5":
                         CancelDelivery();
                         break;
-                    case "7":
+                    case "6":
                         Console.WriteLine("Exiting Tracking System...");
                         return;
                     default:
@@ -108,9 +107,10 @@ private void GetEnRouteDeliveries()
 
 private void CreateDelivery()
 {
+    Console.Clear(); 
     Console.WriteLine("Please enter new delivery's details:");
 
-    // Get delivery details from user 
+    // Get delivery details from user input
     DateTime? orderDate = null;
     DateTime deliveryDate;
     int itemNumber;
@@ -184,28 +184,31 @@ private void CreateDelivery()
 
 private void GetAllDeliveries()
     {
+        Console.Clear(); 
         var allDeliveries = _deliveryRepository.GetAllDeliveries();
         Console.WriteLine("\nAll Deliveries:");
 
         foreach (var delivery in allDeliveries)
             {
-                Console.WriteLine($"Delivery ID: {delivery.CustomerID}, Status: {delivery.DeliveryStatus}");
+                Console.WriteLine($"Customer ID: {delivery.CustomerID}, Delivery ID: {delivery.DeliveryId} Status: {delivery.DeliveryStatus}");
             }
     }
 
 private void GetCompletedDeliveries()
     {
+        Console.Clear(); 
         var completedDeliveries = _deliveryRepository.GetCompletedDeliveries();
         Console.WriteLine("\nCompleted Deliveries:");
 
             foreach (var delivery in completedDeliveries)
             {
-                Console.WriteLine($"Delivery ID: {delivery.CustomerID}, Status: {delivery.DeliveryStatus}");
+                Console.WriteLine($"Delivery ID: {delivery.DeliveryId}, Status: {delivery.DeliveryStatus}");
             }
     }
 
 public bool UpdateDeliveryStatus(string itemNumber, DeliveryStatus newStatus)
     {
+        Console.Clear(); 
         var delivery = _deliveryRepository.GetDeliveryByItemNumber(itemNumber);
         if (delivery != null)
             {
@@ -216,24 +219,33 @@ public bool UpdateDeliveryStatus(string itemNumber, DeliveryStatus newStatus)
     }
 
 private void CancelDelivery()
+{
+    Console.Clear(); 
+    Console.WriteLine("Enter the Delivery ID for the delivery you want to cancel:");
+    int deliveryId;
+
+    while (!int.TryParse(Console.ReadLine(), out deliveryId))
     {
-        Console.WriteLine("Enter the ID of the delivery you want to cancel:");
-        int deliveryId;
-
-        while (!int.TryParse(Console.ReadLine(), out deliveryId))
-            {
-                Console.WriteLine("Invalid input. Please enter delivery ID:");
-            }
-
-        if (_deliveryRepository.DeleteDelivery(deliveryId))
-            {
-                Console.WriteLine("Delivery canceled successfully.");
-            }
-        else
-            {
-                Console.WriteLine("Delivery not found or cancellation failed.");
-            }
+        Console.WriteLine("Invalid input. Please enter delivery ID:");
     }
+
+    // Debug output to print all delivery IDs
+    Console.WriteLine("Customer IDs for current deliveries:");
+    foreach (var delivery in _deliveryRepository.GetAllDeliveries())
+    {
+        Console.WriteLine($"ID: {delivery.CustomerID}");
+    }
+
+    // Call DeleteDelivery and check if deletion was successful
+    if (_deliveryRepository.DeleteDelivery(deliveryId))
+    {
+        Console.WriteLine("Delivery canceled successfully.");
+    }
+    else
+    {
+        Console.WriteLine("Delivery not found or cancellation failed.");
+    }
+}
 
 private int GenerateDeliveryId()
     {

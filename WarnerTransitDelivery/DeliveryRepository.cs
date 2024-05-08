@@ -63,19 +63,16 @@ public void UpdateDeliveryStatus(string itemNumber, DeliveryStatus newStatus)
                 _deliveries.Remove(delivery);
             }
         }
-
-        public bool DeleteDelivery(int deliveryId)
-        {
-    // Find the delivery with the specified ID
-            var delivery = _deliveries.FirstOrDefault(d => d.DeliveryId == deliveryId);
-            if (delivery != null)
-                {
-                 // for remove the delivery from the list
-                _deliveries.Remove(delivery);
-                return true; // Indicates a deletion worked
-                }
-        return false; // Indicates that a delivery was not found
-        }
+public bool DeleteDelivery(int deliveryId)
+{
+    var delivery = _deliveries.FirstOrDefault(d => d.DeliveryId == deliveryId);
+    if (delivery != null)
+    {
+        _deliveries.Remove(delivery);
+        return true; // Delivery deleted successfully
+    }
+    return false; // Delivery not found or deletion failed
+}
 
     }
 };
